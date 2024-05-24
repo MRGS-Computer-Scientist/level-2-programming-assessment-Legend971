@@ -1,21 +1,6 @@
-from tkinter import*
-from app_settings import*
+w_width = 500
+w_height = 700
 
-def __innit__(self):
-    window = Tk()
-    w_width = 500
-    w_height = 500
-    
-    bg_color = "grey"
+app_title = "My App"
 
-    window.title("Calorie Intake")
-    window.geometry(str(w_width) + "x" + str(w_height))
-
-    main_frame = Frame(background="white", width=w_width, height=w_height)
-    main_frame.pack()
-
-    hello_label = Label(text="Hello, World!")
-    hello_label.place(x=300, y=300)
-
-
-    window.mainloop()
+bg_color = "#E7DDFF"
