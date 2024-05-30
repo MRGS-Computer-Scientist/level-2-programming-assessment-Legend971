@@ -13,7 +13,7 @@ class App():
         self.top_frame = Frame(background='red', width=w_width, height=100)
         self.top_frame.pack()
 
-        self.main_frame = Frame(background=bg_color, width=w_width, height=(w_height-200))
+        self.main_frame = Frame(background=bg_color, width=w_width, height=(w_height-500))
         self.main_frame.pack()
 
         self.bottom_frame = Frame(background='blue', width=w_width, height=100)
