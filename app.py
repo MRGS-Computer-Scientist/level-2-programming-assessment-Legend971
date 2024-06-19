@@ -45,3 +45,15 @@ class App():
         # Main App Frame
         self.main_frame = tk.Frame(self.window)
         self.init_main_app(self.main_frame)
+
+    def show_frame(self, frame):
+        # Hide the current frame if it exists
+        if hasattr(self, 'current_frame'):
+            self.current_frame.pack_forget()
+
+        # Show the new frame
+        frame.pack(fill="both", expand=True)
+        frame.tkraise()
+
+        # Update the current_frame attribute
+        self.current_frame = frame
