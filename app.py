@@ -104,3 +104,18 @@ class App():
         # Home button
         self.home_button = tk.Button(frame, text="Home", font=("Helvetica", 12), command=lambda: self.show_frame(self.cover_frame))
         self.home_button.pack(pady=20)
+
+    def draw_pie_chart(self, canvas, data, colors, labels):
+        """
+        Draws a pie chart on the given canvas.
+        """
+        canvas.delete("all")  # Clear the canvas
+        total = sum(data)  # Calculate total calories
+        start_angle = 0  # Starting angle for the first segment
+        arcs = []
+        for i, value in enumerate(data):
+            extent = (value / total) * 360  # Calculate the extent of the segment
+            arc = canvas.create_arc((50, 50, 350, 350), start=start_angle, extent=extent, fill=colors[i], tags=labels[i])
+            arcs.append(arc)
+            start_angle += extent  # Update starting angle for the next segment
+        return arcs
