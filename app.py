@@ -57,3 +57,50 @@ class App():
 
         # Update the current_frame attribute
         self.current_frame = frame
+
+    def init_main_app(self, frame):
+        # Create a frame for the header and progress bar
+        self.header_frame = tk.Frame(frame)
+        self.header_frame.pack(fill="x", pady=10, padx=10)
+
+        # Get current date
+        self.current_date = datetime.now().strftime("%a, %b %d, %Y")
+
+        # Create header with current date
+        self.header = tk.Label(self.header_frame, text=self.current_date, font=("Helvetica", 16))
+        self.header.pack()
+
+        # Label for daily calories required
+        self.daily_cal_label = tk.Label(self.header_frame, text="Daily CALORIES Required", font=("Helvetica", 12))
+        self.daily_cal_label.pack()
+
+        # Frame and canvas for progress bar
+        self.progress_frame = tk.Frame(self.header_frame)
+        self.progress_frame.pack(fill="x", pady=5)
+        self.progress_bar = Canvas(self.progress_frame, height=20, bg='white')
+        self.progress_bar.pack(fill="x")
+        # Text on the progress bar
+        self.progress_text = self.progress_bar.create_text(150, 10, text="3/2000", anchor="e", font=("Helvetica", 10))
+
+        # Initial meal calorie data and limits
+        self.meal_calories = [1, 1, 1]  # Breakfast, Lunch, Dinner (Dinner waiting for input)
+        self.colors = ["#9dc3e6", "#ffc000", "#00b0f0"]  # Corresponding colors
+        self.meal_labels = ["Breakfast", "Lunch", "Dinner"]
+        self.calorie_limits = [500, 700, 800]  # Example calorie limits for each meal
+
+        # Create pie chart canvas
+        self.chart_frame = tk.Frame(frame)
+        self.chart_frame.pack(fill="both", expand=True, padx=10, pady=10)
+        self.chart_canvas = Canvas(self.chart_frame)
+        self.chart_canvas.pack(fill="both", expand=True)
+        self.arcs = self.draw_pie_chart(self.chart_canvas, self.meal_calories, self.colors, self.meal_labels)
+
+        # Bind click events to the pie chart segments
+        self.chart_canvas.bind("<Button-1>", self.on_pie_click)
+
+        # Create input fields and bars for each meal
+        self.create_meal_inputs(frame)
+
+        # Home button
+        self.home_button = tk.Button(frame, text="Home", font=("Helvetica", 12), command=lambda: self.show_frame(self.cover_frame))
+        self.home_button.pack(pady=20)
