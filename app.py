@@ -119,3 +119,15 @@ class App():
             arcs.append(arc)
             start_angle += extent  # Update starting angle for the next segment
         return arcs
+    
+    def on_pie_click(self, event):
+        """
+        Handles click events on the pie chart segments.
+        """
+        item = self.chart_canvas.find_closest(event.x, event.y)  # Find the item closest to the click
+        tags = self.chart_canvas.gettags(item)  # Get the tags of the item
+        if tags:
+            label = tags[0]  # Get the first tag (the label)
+            for meal, calories in zip(self.meal_labels, self.meal_calories):
+                if meal == label:
+                    messagebox.showinfo("Meal Info", f"{meal}: {calories} CALORIES")  # Show meal info in a message box
