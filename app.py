@@ -131,3 +131,46 @@ class App():
             for meal, calories in zip(self.meal_labels, self.meal_calories):
                 if meal == label:
                     messagebox.showinfo("Meal Info", f"{meal}: {calories} CALORIES")  # Show meal info in a message box
+
+    def create_meal_inputs(self, frame):
+        """
+        Creates input fields and bars for each meal.
+        """
+        self.meal_entries = []
+        self.meal_bars = []
+        meals = [("BREAKFAST", self.meal_calories[0]), ("LUNCH", self.meal_calories[1]), ("DINNER", self.meal_calories[2])]
+        for i, meal in enumerate(meals):
+            # Create a frame for each meal input
+            meal_frame = tk.Frame(frame)
+            meal_frame.pack(fill="x", pady=5, padx=10)
+            # Label for the meal
+            label = tk.Label(meal_frame, text=meal[0], font=("Helvetica", 12))
+            label.pack(side="left")
+            # Entry field for the meal calories
+            entry = tk.Entry(meal_frame, width=10)
+            entry.insert(0, meal[1])
+            entry.pack(side="left")
+            self.meal_entries.append(entry)
+
+            # Create bar for meal calorie limit indicator
+            bar = Canvas(meal_frame, height=10, bg='white')
+            bar.pack(fill="x", padx=10, pady=5)
+            self.meal_bars.append(bar)
+            self.update_meal_bar(i, meal[1], self.calorie_limits[i])
+
+        # Update button to apply new calorie values
+        update_button = tk.Button(frame, text="Update", font=("Helvetica", 12), command=self.update_calories)
+        update_button.pack(pady=10)
+
+    def update_meal_bar(self, index, value, limit):
+        """
+        Updates the bar for a meal to show if the calories are within the limit.
+        """
+        bar = self.meal_bars[index]
+        bar.delete("all")  # Clear the bar
+        value = int(value)
+        if value <= limit:
+            bar.create_rectangle(0, 0, (value / limit) * bar.winfo_width(), 10, fill="green")  # Green bar if within limit
+        else:
+            bar.create_rectangle(0, 0, bar.winfo_width(), 10, fill="red")  # Red bar if over the limit
+
