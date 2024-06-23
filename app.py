@@ -199,3 +199,8 @@ class App():
                 self.update_meal_bar(i, value, self.calorie_limits[i])
         except ValueError:
             messagebox.showerror("Input Error", "Please enter valid numbers for calories.")
+
+# Create the main application window
+window = tk.Tk()
+app = App(window)
+window.mainloop()
