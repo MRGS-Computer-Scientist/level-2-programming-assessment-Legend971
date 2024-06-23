@@ -173,4 +173,29 @@ class App():
             bar.create_rectangle(0, 0, (value / limit) * bar.winfo_width(), 10, fill="green")  # Green bar if within limit
         else:
             bar.create_rectangle(0, 0, bar.winfo_width(), 10, fill="red")  # Red bar if over the limit
+    
+    def update_calories(self):
+        """
+        Updates the calorie data, redraws the pie chart, updates the progress bar and meal bars.
+        """
+        try:
+            # Get new calorie values from the input fields
+            self.meal_calories = [int(entry.get()) for entry in self.meal_entries]
 
+            # Redraw the pie chart with new values
+            self.arcs = self.draw_pie_chart(self.chart_canvas, self.meal_calories, self.colors, self.meal_labels)
+            total_calories = sum(self.meal_calories)
+
+            # Update the progress bar
+            self.progress_bar.delete("all")  # Clear the progress bar
+            if total_calories <= 2000:
+                self.progress_bar.create_rectangle(0, 0, (total_calories / 2000) * self.progress_bar.winfo_width(), 20, fill="green")  # Green if within limit
+            else:
+                self.progress_bar.create_rectangle(0, 0, self.progress_bar.winfo_width(), 20, fill="red")  # Red if over the limit
+            self.progress_bar.create_text(150, 10, text=f"{total_calories}/2000", anchor="e", font=("Helvetica", 10))
+
+            # Update the meal bars
+            for i, value in enumerate(self.meal_calories):
+                self.update_meal_bar(i, value, self.calorie_limits[i])
+        except ValueError:
+            messagebox.showerror("Input Error", "Please enter valid numbers for calories.")
