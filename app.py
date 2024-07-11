@@ -106,9 +106,9 @@ class App():
         self.home_button.pack(pady=20)
 
     def draw_pie_chart(self, canvas, data, colors, labels):
-        """
-        Draws a pie chart on the given canvas.
-        """
+        
+        # Draws a pie chart on the given canvas.
+       
         canvas.delete("all")  # Clear the canvas
         total = sum(data)  # Calculate total calories
         start_angle = 0  # Starting angle for the first segment
@@ -121,9 +121,9 @@ class App():
         return arcs
     
     def on_pie_click(self, event):
-        """
-        Handles click events on the pie chart segments.
-        """
+        
+        # Handles click events on the pie chart segments.
+        
         item = self.chart_canvas.find_closest(event.x, event.y)  # Find the item closest to the click
         tags = self.chart_canvas.gettags(item)  # Get the tags of the item
         if tags:
@@ -133,9 +133,9 @@ class App():
                     messagebox.showinfo("Meal Info", f"{meal}: {calories} CALORIES")  # Show meal info in a message box
 
     def create_meal_inputs(self, frame):
-        """
-        Creates input fields and bars for each meal.
-        """
+        
+        # Creates input fields and bars for each meal.
+        
         self.meal_entries = []
         self.meal_bars = []
         meals = [("BREAKFAST", self.meal_calories[0]), ("LUNCH", self.meal_calories[1]), ("DINNER", self.meal_calories[2])]
@@ -163,9 +163,9 @@ class App():
         update_button.pack(pady=10)
 
     def update_meal_bar(self, index, value, limit):
-        """
-        Updates the bar for a meal to show if the calories are within the limit.
-        """
+        
+        # Updates the bar for a meal to show if the calories are within the limit.
+        
         bar = self.meal_bars[index]
         bar.delete("all")  # Clear the bar
         value = int(value)
@@ -175,9 +175,9 @@ class App():
             bar.create_rectangle(0, 0, bar.winfo_width(), 10, fill="red")  # Red bar if over the limit
     
     def update_calories(self):
-        """
-        Updates the calorie data, redraws the pie chart, updates the progress bar and meal bars.
-        """
+        
+        # Updates the calorie data, redraws the pie chart, updates the progress bar and meal bars.
+        
         try:
             # Get new calorie values from the input fields
             self.meal_calories = [int(entry.get()) for entry in self.meal_entries]
