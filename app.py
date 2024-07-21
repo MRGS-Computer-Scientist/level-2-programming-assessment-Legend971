@@ -104,6 +104,8 @@ class App():
         # Home button
         self.home_button = tk.Button(frame, text="Home", font=("Helvetica", 12), command=lambda: self.show_frame(self.cover_frame))
         self.home_button.pack(pady=20)
+        self.exit_btn = tk.Button(frame, text="Exit", font=("Helvetica", 12), command=self.window.quit)
+        self.exit_btn.pack(pady=10)
 
     def draw_pie_chart(self, canvas, data, colors, labels):
         
