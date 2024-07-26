@@ -32,8 +32,9 @@ class App():
 
         # Text widget for explanation
         howto_text = Text(self.howto_frame, wrap="word", font=("Helvetica", 14), height=10, width=50)
-        howto_text.insert(tk.END, "Explanation on how to calculate calories...\n\n")
-        howto_text.insert(tk.END, "Calories are calculated based on various factors such as weight, activity level, and basal metabolic rate (BMR). Consult a nutritionist or use a reliable online calculator for accurate results.")
+        howto_text.insert(tk.END, "Instructions and explanation on how to calculate calories...\n\n")
+        howto_text.insert(tk.END, "Calories are calculated based on various factors such as weight, activity level, and basal metabolic rate (BMR). Consult a nutritionist or use a reliable online calculator for accurate results.\n\n")
+        howto_text.insert(tk.END, "Enter the amount of calories you had for breakfast, lunch and dinner in the entry widget. If the progress bar is red, you are having too many calories, if the progress bar is green, you are in a healthy calorie intake range.")
         howto_text.config(state=tk.DISABLED)  # Disable editing
         howto_text.pack(pady=20, padx=20, fill=tk.BOTH, expand=True)
 
